@@ -26,7 +26,7 @@ rm -rf test_BSW_hw_emu
 cp -r ./src/host/BSW ./test_BSW_hw_emu
 cp ./src/host/common/* ./test_BSW_hw_emu/
 
-xocc -g --target hw_emu --platform $AWS_PLATFORM --link \
+v++ -g --target hw_emu --platform $AWS_PLATFORM --link \
     --nk BSW_bank0:1 \
     --sp BSW_bank0_1.m00_axi:bank0 \
     --sp BSW_bank0_1.m01_axi:bank0 \

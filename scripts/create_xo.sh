@@ -25,8 +25,8 @@ curr_dir=$PWD
 rm -rf xclbin
 mkdir xclbin
 
-/opt/Xilinx/Vivado/2017.4.op/bin/vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/GACTX_bank3.xo GACTX $AWS_PLATFORM bank3 2
-/opt/Xilinx/Vivado/2017.4.op/bin/vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/BSW_bank0.xo BSW $AWS_PLATFORM bank0 4;
+vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/GACTX_bank3.xo GACTX $AWS_PLATFORM bank3 2
+vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/BSW_bank0.xo BSW $AWS_PLATFORM bank0 4;
 
 for i in `seq 1 3`;
 do
@@ -36,7 +36,7 @@ do
     sed -i "s/bank0/bank$i/g" BSW_bank$i.v
     sed -i "s/bank0/bank$i/g" BSW_bank$i.xml
     cd $curr_dir
-    /opt/Xilinx/Vivado/2017.4.op/bin/vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/BSW_bank$i.xo BSW $AWS_PLATFORM bank$i 4;
+    vivado -mode batch -source ./scripts/gen_xo.tcl -tclargs xclbin/BSW_bank$i.xo BSW $AWS_PLATFORM bank$i 4;
     rm ./src/hdl/BSW/top_modules/BSW_bank$i.v ./src/hdl/BSW/top_modules/BSW_bank$i.xml
 done
 
